@@ -1,11 +1,11 @@
 # Project using Flask + MongoDB
-Project developed using Flask and MongoDB.
-We can create an user account in the system, add the username and password in the database. We use the hash code to create a encrypted password.
+The project was developed using Flask and MongoDB.
+We can create a user account in the system, add the username and password in the database. We use the hash code to create an encrypted password.
 
 
 ## Start
 Need to have a MongoDB service started in localhost.
-After that, just start the author1.py, that will be responsible to add Json information in the table inside the database service.
+After that, just start the author1.py, wich will be responsible to add JSON information in the table inside the database service.
 
 ```
 python3 author1.py
