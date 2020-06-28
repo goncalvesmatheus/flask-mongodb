@@ -19,7 +19,7 @@ mongo = PyMongo(app)
 def index():
     if 'username' in session:
         session['logged_in'] = True
-        #return 'Your are logged in as ' + session['username']
+        # return 'Your are logged in as ' + session['username']
         return render_template('info.html')
 
     return render_template('index.html')
@@ -56,33 +56,14 @@ def register():
 
     return render_template('register.html')
 
-"""
-@app.route('/info', methods=['GET'])
-def info():
-    if not session.get('logged_in'):
-        return 'Not authorized.'
-    else:
-        MONGO_URI = 'mongodb://localhost'
-        # connect to database
-        client = MongoClient(MONGO_URI)
-        # select the database that will be used
-        db = client['author']
-        # specify the collection
-        collection = db['author1']
-        # query find in database passed for variable
-        data = collection.find()
-        # transform the collection query for list
-        #data = list(collection.find())
-        # return data inside the render template page
-        return render_template('teste.html', data=data)
-"""
+
 @app.route('/search', methods=['POST', 'GET'])
 def search():
     if not session.get('logged_in'):
         return 'Not authorized.'
     else:
         titlesearch = request.values.get('titlesearch')
-        print (titlesearch)
+        authorsearch = request.values.get('authorsearch')
         MONGO_URI = 'mongodb://localhost'
         # connect to database
         client = MongoClient(MONGO_URI)
@@ -91,20 +72,29 @@ def search():
         # specify the collection
         collection = db['author1']
 
-        if not titlesearch:
-            print('vazio')
+        if titlesearch and authorsearch:
+            print('search using title and author')
             # return all in database
             data = collection.find()
+        elif titlesearch:
+            print('search title')
+            # search title using variable passed from form
+            # this search use a match between words inside the title
+            regx = re.compile(titlesearch, re.IGNORECASE)
+            #total = collection.find_one({"title": regx})
+            # print(total)
+            data = collection.find({"title": {'$regex': regx}})
+        elif authorsearch:
+            print('search author.')
+            # search author using variable passed from form
+            # this search use a match between words inside the title
+            regx = re.compile(authorsearch, re.IGNORECASE)
+            data = collection.find({'author.given': {'$regex': regx}})
             print(data)
         else:
-            print('aceita')
-            # search title using variable passed from form
-            #data = collection.find( { "title" : titlesearch } )
-            regx = re.compile(titlesearch, re.IGNORECASE)
-            total = collection.find_one( { "title" : regx })
-            print(total)
-            data = collection.find( { "title" : {'$regex': regx} } )
-            print(data)
+            print('both empty')
+            print('complety database')
+            data = collection.find()
 
         # transform the collection query for list
         #data = list(collection.find())
