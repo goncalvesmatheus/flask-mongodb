@@ -1,12 +1,18 @@
 {% extends "layout.html" %}
 {% block body %}
+<title>Search</title>
+
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <form method=GET action="{{ url_for('info') }}">
+            <form method=GET action="{{ url_for('search') }}">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Query Search</label>
-                    <input type="text" class="form-control" name="search" placeholder="">
+                    <label for="exampleTitle">Search Title</label>
+                    <input type="text" class="form-control" name="titlesearch" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleAuthor">Query Search</label>
+                    <input type="text" class="form-control" name="authorsearch" placeholder="">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Search</button>
             </form>

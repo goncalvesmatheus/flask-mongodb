@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <ul>
+            {% for i in data %}
+                <li>{{ i }}</li>
+            {% endfor %}
+        </ul>
+            {{ total }}
+    </div>
+</div>
+{% endblock %}
