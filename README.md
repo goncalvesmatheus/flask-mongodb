@@ -12,7 +12,7 @@ python3 author1.py
 ```
 And now start the app.py and open in the Browser http://127.0.0.1:5000 
 ```
-python3 aoo.py
+python3 app.py
 ```
 
 
