@@ -1,6 +1,7 @@
 # Project using Flask + MongoDB
 The project was developed using Flask and MongoDB.
 We can create a user account in the system, add the username and password in the database. We use the hash code to create an encrypted password.
+For now, we can search for titles and authors inside the database where we add information extracted from Crossref Metadata.
 
 
 ## Start
