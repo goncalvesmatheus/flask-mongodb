@@ -5,7 +5,6 @@ from pymongo import MongoClient
 from collections import namedtuple
 import bcrypt
 import re
-#from author1 import MyMongo
 
 
 app = Flask(__name__)
@@ -19,7 +18,7 @@ mongo = PyMongo(app)
 def index():
     if 'username' in session:
         session['logged_in'] = True
-        # return 'Your are logged in as ' + session['username']
+        # return the next page to make a query
         return render_template('info.html')
 
     return render_template('index.html')
@@ -74,6 +73,7 @@ def search():
 
         if titlesearch and authorsearch:
             print('search using title and author')
+            # Need to finish
             # return all in database
             data = collection.find()
         elif titlesearch:
@@ -81,13 +81,11 @@ def search():
             # search title using variable passed from form
             # this search use a match between words inside the title
             regx = re.compile(titlesearch, re.IGNORECASE)
-            #total = collection.find_one({"title": regx})
-            # print(total)
             data = collection.find({"title": {'$regex': regx}})
         elif authorsearch:
             print('search author.')
             # search author using variable passed from form
-            # this search use a match between words inside the title
+            # this search use a match between words inside the author name
             regx = re.compile(authorsearch, re.IGNORECASE)
             data = collection.find({'author.given': {'$regex': regx}})
             print(data)
@@ -96,9 +94,6 @@ def search():
             print('complety database')
             data = collection.find()
 
-        # transform the collection query for list
-        #data = list(collection.find())
-        # return data inside the render template page
         return render_template('search.html', data=data)
 
 
