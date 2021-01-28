@@ -6,7 +6,7 @@ For now, we can search for titles and authors inside the database where we add i
 
 ## Start
 Need to have a MongoDB service started in localhost.
-After that, just start the author1.py, wich will be responsible to add JSON information in the table inside the database service.
+After that, just start the author1.py, which will be responsible to add JSON information in the table inside the database service.
 
 ```
 python3 author1.py
